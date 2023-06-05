@@ -13,7 +13,7 @@ class PerformanceSeeder extends Seeder
     public function run(): void
     {
         $i = 0;
-        while ($i < 100) {
+        while ($i < 300) {
             Models\FundManager::factory($i)->create();
             $companies = Models\Company::factory($i)->create();
             Models\Fund::factory(2*$i)->hasAttached($companies)->create();

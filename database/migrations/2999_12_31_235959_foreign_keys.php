@@ -18,16 +18,16 @@ class ForeignKeys extends Migration
         });
 
         Schema::table( \App\Models\FundAlias::TABLE, function (Blueprint $table) {
-            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->restrictOnDelete();
         });
 
         Schema::table('company_fund', function (Blueprint $table) {
-            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor( \App\Models\Company::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->restrictOnDelete();
+            $table->foreignIdFor( \App\Models\Company::class)->constrained()->restrictOnDelete();
         });
 
         Schema::table('fund_duplicates_log', function (Blueprint $table) {
-            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor( \App\Models\Fund::class)->constrained()->restrictOnDelete();
         });
     }
 
