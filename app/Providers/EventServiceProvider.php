@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Events\DuplicateFundWarning;
+use App\Events\FundCreatedOrUpdated;
+use App\Listeners\DuplicateFundWarningListener;
+use App\Listeners\LogPossibleFundDuplicates;
+use App\Listeners\SendDuplicateFundWarning;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +21,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        DuplicateFundWarning::class => [
+            LogPossibleFundDuplicates::class,
+        ],
+        FundCreatedOrUpdated::class => [
+            SendDuplicateFundWarning::class,
         ],
     ];
 
